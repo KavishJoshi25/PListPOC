@@ -88,6 +88,20 @@ extension EmployeeListViewController:UITableViewDataSource,UITableViewDelegate{
         return 70
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.redirectDetailView(indexpath: indexPath)
+    }
+    
+    //Mark:redirectDetailView
+    func redirectDetailView(indexpath:IndexPath)  {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let detailsViewController = storyboard.instantiateViewController(withIdentifier: "EmployeeFormViewController") as! EmployeeFormViewController;
+        detailsViewController.pListUpdatedelegate = self;
+        detailsViewController.updatePListObj = pListArray[indexpath.row] as! NSMutableDictionary;
+        navigationController?.pushViewController(detailsViewController,
+                                                 animated: true)
+    }
+    
     
 }
 

@@ -17,6 +17,9 @@ class EmployeeFormViewController: UIViewController {
     
     let outerView = UIView()
     internal var pListUpdatedelegate: updatePListDelegate?
+
+    var updatePListObj = NSMutableDictionary()
+
     
     var fullName = ""
     var mobileNum = ""
@@ -109,10 +112,18 @@ class EmployeeFormViewController: UIViewController {
         //Name
         if withtag == 1 {
             
+            if (updatePListObj.count  > 0){
+                customTextBox.text = updatePListObj.value(forKey: "FullName") as? String
+                fullName = (updatePListObj.value(forKey: "FullName") as? String)!
+            }
             
         }//Number
         else if withtag == 2{
             customTextBox.keyboardType = UIKeyboardType.numberPad
+            if (updatePListObj.count  > 0){
+                customTextBox.text = updatePListObj.value(forKey: "MobileNum")  as? String
+                mobileNum = (updatePListObj.value(forKey: "MobileNum")  as? String)!
+            }
         }
         
         return customTextBox
