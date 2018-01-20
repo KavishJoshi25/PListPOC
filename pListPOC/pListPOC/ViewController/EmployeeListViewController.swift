@@ -69,11 +69,6 @@ extension EmployeeListViewController:UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! EmployeeListViewControllerCell
         cell.backgroundColor = .black
-//        if !cell.contentView.subviews.isEmpty {
-//            for subview: UIView in cell.contentView.subviews {
-//                subview.removeFromSuperview()
-//            }
-//        }
         
          pListObj = pListArray[indexPath.row] as! NSMutableDictionary
         

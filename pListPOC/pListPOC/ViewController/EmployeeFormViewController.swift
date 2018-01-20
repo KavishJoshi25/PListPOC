@@ -70,7 +70,7 @@ class EmployeeFormViewController: UIViewController {
         self.view.endEditing(true)
         let fields = validTextFields()
         if !fields.isEmpty {
-//            CommonMethods.showAlert("Please correct the following fields and try again:\n", alertSubtitle: fields, viewController: self)
+            CommonMethods.showAlert("Please correct the following fields and try again:\n", alertSubtitle: fields, viewController: self)
             
             return
         }
@@ -134,7 +134,7 @@ class EmployeeFormViewController: UIViewController {
         var errors = ""
         
         if fullName.isEmpty {
-            errors += "FullName" + " \n"
+            errors += "Full Name" + " \n"
         }
         
         if mobileNum.isEmpty {

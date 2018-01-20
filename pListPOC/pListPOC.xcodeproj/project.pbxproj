@@ -16,6 +16,7 @@
 		950F44612013700F009B602D /* EmployeeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950F44602013700F009B602D /* EmployeeListViewController.swift */; };
 		950F44632013728E009B602D /* EmployeeFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950F44622013728E009B602D /* EmployeeFormViewController.swift */; };
 		950F446820138992009B602D /* PListEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950F446720138992009B602D /* PListEntity.swift */; };
+		950F446B20139957009B602D /* CommonMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950F446A20139957009B602D /* CommonMethods.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		950F44602013700F009B602D /* EmployeeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeListViewController.swift; sourceTree = "<group>"; };
 		950F44622013728E009B602D /* EmployeeFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeFormViewController.swift; sourceTree = "<group>"; };
 		950F446720138992009B602D /* PListEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PListEntity.swift; sourceTree = "<group>"; };
+		950F446A20139957009B602D /* CommonMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonMethods.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				950F443220136BFD009B602D /* Assets.xcassets */,
 				950F443420136BFD009B602D /* LaunchScreen.storyboard */,
 				950F443720136BFD009B602D /* Info.plist */,
+				950F446A20139957009B602D /* CommonMethods.swift */,
 			);
 			path = pListPOC;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				950F446820138992009B602D /* PListEntity.swift in Sources */,
 				950F442C20136BFD009B602D /* AppDelegate.swift in Sources */,
 				950F44632013728E009B602D /* EmployeeFormViewController.swift in Sources */,
+				950F446B20139957009B602D /* CommonMethods.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
