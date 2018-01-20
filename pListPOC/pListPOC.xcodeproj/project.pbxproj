@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		950F442C20136BFD009B602D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950F442B20136BFD009B602D /* AppDelegate.swift */; };
-		950F442E20136BFD009B602D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950F442D20136BFD009B602D /* ViewController.swift */; };
 		950F443120136BFD009B602D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 950F442F20136BFD009B602D /* Main.storyboard */; };
 		950F443320136BFD009B602D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 950F443220136BFD009B602D /* Assets.xcassets */; };
 		950F443620136BFD009B602D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 950F443420136BFD009B602D /* LaunchScreen.storyboard */; };
 		950F444120136BFD009B602D /* pListPOCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950F444020136BFD009B602D /* pListPOCTests.swift */; };
 		950F444C20136BFD009B602D /* pListPOCUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950F444B20136BFD009B602D /* pListPOCUITests.swift */; };
+		950F44612013700F009B602D /* EmployeeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950F44602013700F009B602D /* EmployeeListViewController.swift */; };
+		950F44632013728E009B602D /* EmployeeFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950F44622013728E009B602D /* EmployeeFormViewController.swift */; };
+		950F446820138992009B602D /* PListEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950F446720138992009B602D /* PListEntity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +38,6 @@
 /* Begin PBXFileReference section */
 		950F442820136BFD009B602D /* pListPOC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pListPOC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		950F442B20136BFD009B602D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		950F442D20136BFD009B602D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		950F443020136BFD009B602D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		950F443220136BFD009B602D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		950F443520136BFD009B602D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +48,9 @@
 		950F444720136BFD009B602D /* pListPOCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pListPOCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		950F444B20136BFD009B602D /* pListPOCUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pListPOCUITests.swift; sourceTree = "<group>"; };
 		950F444D20136BFD009B602D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		950F44602013700F009B602D /* EmployeeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeListViewController.swift; sourceTree = "<group>"; };
+		950F44622013728E009B602D /* EmployeeFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeFormViewController.swift; sourceTree = "<group>"; };
+		950F446720138992009B602D /* PListEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PListEntity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,8 +101,9 @@
 		950F442A20136BFD009B602D /* pListPOC */ = {
 			isa = PBXGroup;
 			children = (
+				950F446420137543009B602D /* Model */,
+				950F445920136C3B009B602D /* ViewController */,
 				950F442B20136BFD009B602D /* AppDelegate.swift */,
-				950F442D20136BFD009B602D /* ViewController.swift */,
 				950F442F20136BFD009B602D /* Main.storyboard */,
 				950F443220136BFD009B602D /* Assets.xcassets */,
 				950F443420136BFD009B602D /* LaunchScreen.storyboard */,
@@ -123,6 +128,31 @@
 				950F444D20136BFD009B602D /* Info.plist */,
 			);
 			path = pListPOCUITests;
+			sourceTree = "<group>";
+		};
+		950F445920136C3B009B602D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				950F44602013700F009B602D /* EmployeeListViewController.swift */,
+				950F44622013728E009B602D /* EmployeeFormViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		950F446420137543009B602D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				950F446520137555009B602D /* EntityClass */,
+				950F446720138992009B602D /* PListEntity.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		950F446520137555009B602D /* EntityClass */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = EntityClass;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,8 +289,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				950F442E20136BFD009B602D /* ViewController.swift in Sources */,
+				950F44612013700F009B602D /* EmployeeListViewController.swift in Sources */,
+				950F446820138992009B602D /* PListEntity.swift in Sources */,
 				950F442C20136BFD009B602D /* AppDelegate.swift in Sources */,
+				950F44632013728E009B602D /* EmployeeFormViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
