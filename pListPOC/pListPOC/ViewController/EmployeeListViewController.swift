@@ -68,7 +68,7 @@ extension EmployeeListViewController:UITableViewDataSource,UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! EmployeeListViewControllerCell
-        
+        cell.backgroundColor = .black
 //        if !cell.contentView.subviews.isEmpty {
 //            for subview: UIView in cell.contentView.subviews {
 //                subview.removeFromSuperview()
@@ -82,6 +82,10 @@ extension EmployeeListViewController:UITableViewDataSource,UITableViewDelegate{
         
         return cell
         
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
     }
     
     
@@ -102,12 +106,12 @@ class EmployeeListViewControllerCell: UITableViewCell {
         contentView.addSubview(name)
         contentView.addSubview(mobileNumber)
 
-        name.textColor = .black
-        mobileNumber.textColor = .black
+        name.textColor = .white
+        mobileNumber.textColor = .white
 
-        NSLayoutConstraint.activate([name.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),name.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 5),name.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: 0),name.heightAnchor.constraint(equalToConstant: 35) ])
+        NSLayoutConstraint.activate([name.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),name.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 5),name.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: 0),name.heightAnchor.constraint(equalToConstant: 30) ])
         
-         NSLayoutConstraint.activate([mobileNumber.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 0),mobileNumber.leftAnchor.constraint(equalTo: name.leftAnchor, constant: 5),mobileNumber.widthAnchor.constraint(equalTo: name.widthAnchor, constant: 0),mobileNumber.heightAnchor.constraint(equalToConstant: 35) ])
+         NSLayoutConstraint.activate([mobileNumber.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 0),mobileNumber.leftAnchor.constraint(equalTo: name.leftAnchor, constant: 0),mobileNumber.widthAnchor.constraint(equalTo: name.widthAnchor, constant: 0),mobileNumber.heightAnchor.constraint(equalToConstant: 30) ])
         
     }
     

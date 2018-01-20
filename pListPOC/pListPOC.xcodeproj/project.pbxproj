@@ -142,17 +142,17 @@
 		950F446420137543009B602D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				950F446520137555009B602D /* EntityClass */,
+				950F446920139201009B602D /* CmmonMethods */,
 				950F446720138992009B602D /* PListEntity.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		950F446520137555009B602D /* EntityClass */ = {
+		950F446920139201009B602D /* CmmonMethods */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = EntityClass;
+			path = CmmonMethods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

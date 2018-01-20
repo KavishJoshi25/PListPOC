@@ -31,11 +31,11 @@ class EmployeeFormViewController: UIViewController {
     func initalizeUiComponents(){
         
         //View
-        
+        view.backgroundColor = .black
         //outerView
         view.addSubview(outerView);
         outerView.translatesAutoresizingMaskIntoConstraints = false;
-        outerView.backgroundColor = .gray
+        outerView.backgroundColor = .black
         NSLayoutConstraint.activate([outerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),outerView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 5),outerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -10),outerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5) ]);
         
         
@@ -86,7 +86,7 @@ class EmployeeFormViewController: UIViewController {
     func returnCustomButton(title:String) -> UIButton {
         let customButton = UIButton()
         customButton.setTitle(title, for: .normal)
-        customButton.backgroundColor  = .black
+        customButton.backgroundColor  = .white
         
         return customButton
     }
@@ -100,7 +100,7 @@ class EmployeeFormViewController: UIViewController {
         customTextBox.autocorrectionType = .no
         customTextBox.tintColor = UIColor.white
         customTextBox.textColor = UIColor.white
-        customTextBox.backgroundColor = UIColor.black
+        customTextBox.backgroundColor = UIColor.white
         customTextBox.placeholder =  placeHolder
         customTextBox.tag = withtag
         
