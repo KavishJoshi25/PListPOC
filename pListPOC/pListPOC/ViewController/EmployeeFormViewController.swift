@@ -30,12 +30,13 @@ class EmployeeFormViewController: UIViewController {
     //Mark:initalizeUiComponents
     func initalizeUiComponents(){
         
-        //View
-        view.backgroundColor = .black
+        //add title to navigation bar
+        self.navigationItem.title = "Employee Form"
+        
         //outerView
         view.addSubview(outerView);
         outerView.translatesAutoresizingMaskIntoConstraints = false;
-        outerView.backgroundColor = .black
+        outerView.backgroundColor = .clear
         NSLayoutConstraint.activate([outerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),outerView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 5),outerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -10),outerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5) ]);
         
         
@@ -86,7 +87,8 @@ class EmployeeFormViewController: UIViewController {
     func returnCustomButton(title:String) -> UIButton {
         let customButton = UIButton()
         customButton.setTitle(title, for: .normal)
-        customButton.backgroundColor  = .white
+        customButton.setTitleColor(.black, for: .normal)
+        customButton.backgroundColor  = .blue
         
         return customButton
     }
@@ -98,9 +100,9 @@ class EmployeeFormViewController: UIViewController {
         let customTextBox = UITextField()
         customTextBox.delegate = self
         customTextBox.autocorrectionType = .no
-        customTextBox.tintColor = UIColor.white
-        customTextBox.textColor = UIColor.white
-        customTextBox.backgroundColor = UIColor.white
+        customTextBox.tintColor = .white
+        customTextBox.textColor = .white
+        customTextBox.backgroundColor = .blue
         customTextBox.placeholder =  placeHolder
         customTextBox.tag = withtag
         
@@ -133,6 +135,7 @@ class EmployeeFormViewController: UIViewController {
     
 }
 
+//Mark:Textfield delegate methods
 extension EmployeeFormViewController:UITextFieldDelegate{
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool{
