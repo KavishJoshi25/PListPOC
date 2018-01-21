@@ -10,5 +10,8 @@ import Foundation
 
 class PListEntity: NSObject {
     
+    var fullName = ""
+    var mobileNumber = ""
+    var favorite = ""
     
 }

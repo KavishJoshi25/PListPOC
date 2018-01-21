@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol updatePListDelegate {
-    func refreshPList(data:NSMutableDictionary)
+    func refreshPList(data:PListEntity)
 }
 
 class EmployeeFormViewController: UIViewController {
@@ -18,8 +18,9 @@ class EmployeeFormViewController: UIViewController {
     let outerView = UIView()
     internal var pListUpdatedelegate: updatePListDelegate?
 
-    var updatePListObj = NSMutableDictionary()
-
+    var updatePListObj = PListEntity()
+    var indexpath = 0
+    
     
     var fullName = ""
     var mobileNum = ""
@@ -35,6 +36,7 @@ class EmployeeFormViewController: UIViewController {
         
         //add title to navigation bar
         self.navigationItem.title = "Employee Form"
+        
         
         //outerView
         view.addSubview(outerView);
@@ -76,10 +78,11 @@ class EmployeeFormViewController: UIViewController {
         }
         else{
             
-            let pListData = NSMutableDictionary()
-            pListData.setValue(fullName, forKey: "FullName")
-            pListData.setValue(mobileNum, forKey: "MobileNum")
-            pListUpdatedelegate?.refreshPList(data: pListData)
+            let plistEntityObj = PListEntity()
+            plistEntityObj.fullName = fullName
+            plistEntityObj.mobileNumber = mobileNum
+            
+            pListUpdatedelegate?.refreshPList(data: plistEntityObj)
             navigationController?.popViewController(animated: true)
         }
         
@@ -112,17 +115,17 @@ class EmployeeFormViewController: UIViewController {
         //Name
         if withtag == 1 {
             
-            if (updatePListObj.count  > 0){
-                customTextBox.text = updatePListObj.value(forKey: "FullName") as? String
-                fullName = (updatePListObj.value(forKey: "FullName") as? String)!
+            if (!updatePListObj.fullName.isEmpty){
+                customTextBox.text = updatePListObj.fullName
+                fullName = updatePListObj.fullName
             }
             
         }//Number
         else if withtag == 2{
             customTextBox.keyboardType = UIKeyboardType.numberPad
-            if (updatePListObj.count  > 0){
-                customTextBox.text = updatePListObj.value(forKey: "MobileNum")  as? String
-                mobileNum = (updatePListObj.value(forKey: "MobileNum")  as? String)!
+            if (!updatePListObj.mobileNumber.isEmpty){
+                customTextBox.text = updatePListObj.mobileNumber
+                mobileNum = updatePListObj.mobileNumber
             }
         }
         

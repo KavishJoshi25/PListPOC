@@ -103,6 +103,7 @@
 		950F442A20136BFD009B602D /* pListPOC */ = {
 			isa = PBXGroup;
 			children = (
+				950F446920139201009B602D /* CmmonMethods */,
 				950F446420137543009B602D /* Model */,
 				950F445920136C3B009B602D /* ViewController */,
 				950F442B20136BFD009B602D /* AppDelegate.swift */,
@@ -145,7 +146,6 @@
 		950F446420137543009B602D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				950F446920139201009B602D /* CmmonMethods */,
 				950F446720138992009B602D /* PListEntity.swift */,
 			);
 			path = Model;

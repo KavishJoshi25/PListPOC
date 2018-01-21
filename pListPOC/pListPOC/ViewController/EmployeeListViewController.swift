@@ -14,7 +14,12 @@ class EmployeeListViewController: UIViewController {
     
     @IBOutlet weak var employeeTableView: UITableView!
     
-    let pListArray = NSMutableArray()
+    
+    var pListArray = [PListEntity]()
+    var pListFavArray = [PListEntity]()
+    
+    var isfavBtnPressed = false
+    
     var pListObj = NSMutableDictionary()
     
     let reuseIdentifier = "tCell"
@@ -27,13 +32,32 @@ class EmployeeListViewController: UIViewController {
     
     func initalizeUiComponents(){
         
+        //AllBtn
+        let allContactsBtn = self.returnCustomButton(title: "All");
+        
+        view.addSubview(allContactsBtn);
+        allContactsBtn.addTarget(self, action: #selector(allContactsBtnPressed), for: .touchUpInside)
+        
+        allContactsBtn.translatesAutoresizingMaskIntoConstraints = false;
+        NSLayoutConstraint.activate([allContactsBtn.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),allContactsBtn.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 5),allContactsBtn.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),allContactsBtn.heightAnchor.constraint(equalToConstant: 50)  ]);
+        
+        //FavouriteBtn
+        let favouriteBtn = self.returnCustomButton(title: "Favourite");
+        
+        view.addSubview(favouriteBtn);
+        favouriteBtn.addTarget(self, action: #selector(favouriteBtnPressed), for: .touchUpInside)
+        
+        favouriteBtn.translatesAutoresizingMaskIntoConstraints = false;
+        NSLayoutConstraint.activate([favouriteBtn.topAnchor.constraint(equalTo: allContactsBtn.topAnchor, constant: 0),favouriteBtn.leftAnchor.constraint(equalTo: allContactsBtn.rightAnchor, constant: 5),favouriteBtn.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),favouriteBtn.heightAnchor.constraint(equalToConstant: 50)  ]);
+        
+        
          //UItable view
         employeeTableView.delegate = self
         employeeTableView.dataSource = self
         employeeTableView.register(EmployeeListViewControllerCell.self, forCellReuseIdentifier: reuseIdentifier)
         
         employeeTableView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([employeeTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),employeeTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),employeeTableView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 0),employeeTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: 0)])
+        NSLayoutConstraint.activate([employeeTableView.topAnchor.constraint(equalTo: allContactsBtn.bottomAnchor, constant: 0),employeeTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),employeeTableView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 0),employeeTableView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: 0)])
        
         //Adding title to navigation bar
         self.navigationItem.title = "Employee List"
@@ -51,11 +75,35 @@ class EmployeeListViewController: UIViewController {
         navigationController?.pushViewController(detailsViewController,
                                                  animated: true)
     }
+    
+    //Mark:allContactsBtnPressed
+    @objc func allContactsBtnPressed()  {
+        isfavBtnPressed = false
+        
+        employeeTableView.reloadData()
+    }
+    
+    //Mark:favouriteBtnPressed
+    @objc func favouriteBtnPressed()  {
+        isfavBtnPressed = true
+        pListFavArray = pListArray.filter({$0.favorite == "Fav"})
+        employeeTableView.reloadData()
+    }
+    
+    //Mark:returnCustomButton
+    func returnCustomButton(title:String) -> UIButton {
+        let customButton = UIButton()
+        customButton.setTitle(title, for: .normal)
+        customButton.setTitleColor(.black, for: .normal)
+        customButton.backgroundColor  = .blue
+        
+        return customButton
+    }
 }
 
 extension EmployeeListViewController:updatePListDelegate{
-    func refreshPList(data: NSMutableDictionary) {
-        pListArray.add(data)
+    func refreshPList(data: PListEntity) {
+        pListArray.append(data)
         employeeTableView.reloadData()
     }
 }
@@ -63,17 +111,32 @@ extension EmployeeListViewController:updatePListDelegate{
 extension EmployeeListViewController:UITableViewDataSource,UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return pListArray.count
+        
+        if isfavBtnPressed == true{
+            return pListFavArray.count
+        }else{
+            return pListArray.count
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! EmployeeListViewControllerCell
-        cell.backgroundColor = .black
+        cell.backgroundColor = .blue
         
-         pListObj = pListArray[indexPath.row] as! NSMutableDictionary
+        var p:PListEntity = PListEntity()
         
-        cell.name.text = pListObj.value(forKey: "FullName") as? String
-        cell.mobileNumber.text = pListObj.value(forKey: "MobileNum") as? String
+        if isfavBtnPressed == true{
+            p = pListFavArray[indexPath.row]
+        }else{
+            p = pListArray[indexPath.row]
+        }
+        
+        cell.name.text = p.fullName
+        cell.mobileNumber.text = p.mobileNumber
+        
+        cell.favBtn.tag = indexPath.row
+        cell.favBtn.addTarget(self, action: #selector(favBtnPressed(sender:)), for: .touchUpInside)
         
         return cell
         
@@ -92,9 +155,27 @@ extension EmployeeListViewController:UITableViewDataSource,UITableViewDelegate{
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let detailsViewController = storyboard.instantiateViewController(withIdentifier: "EmployeeFormViewController") as! EmployeeFormViewController;
         detailsViewController.pListUpdatedelegate = self;
-        detailsViewController.updatePListObj = pListArray[indexpath.row] as! NSMutableDictionary;
+        detailsViewController.updatePListObj = pListArray[indexpath.row] ;
+        pListArray.remove(at: indexpath.row)
         navigationController?.pushViewController(detailsViewController,
                                                  animated: true)
+    }
+    
+    //Mark:favBtnPressed
+    @objc func favBtnPressed(sender:UIButton){
+        print("favBtnPressed----->" + "\(sender.tag)")
+        var p:PListEntity = PListEntity()
+        p = pListArray[sender.tag]
+
+        let obj = PListEntity()
+        obj.fullName = p.fullName
+        obj.mobileNumber = p.mobileNumber
+        obj.favorite =  "Fav"
+        
+        pListArray.remove(at: sender.tag)
+        pListArray.insert(obj, at: sender.tag)
+        print(pListArray)
+        
     }
     
     
@@ -106,21 +187,30 @@ class EmployeeListViewControllerCell: UITableViewCell {
     var name = UILabel()
     var mobileNumber = UILabel()
     
+    var favBtn = UIButton()
+    
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         name.translatesAutoresizingMaskIntoConstraints = false
         mobileNumber.translatesAutoresizingMaskIntoConstraints = false
-        
+        favBtn.translatesAutoresizingMaskIntoConstraints = false
+
         contentView.addSubview(name)
         contentView.addSubview(mobileNumber)
+        contentView.addSubview(favBtn)
 
         name.textColor = .white
         mobileNumber.textColor = .white
 
-        NSLayoutConstraint.activate([name.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),name.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 5),name.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: 0),name.heightAnchor.constraint(equalToConstant: 30) ])
+        favBtn.setImage(UIImage(named:"icons8-star-50"), for: .normal)
+        
+        NSLayoutConstraint.activate([name.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),name.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 5),name.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.6),name.heightAnchor.constraint(equalToConstant: 30) ])
         
          NSLayoutConstraint.activate([mobileNumber.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 0),mobileNumber.leftAnchor.constraint(equalTo: name.leftAnchor, constant: 0),mobileNumber.widthAnchor.constraint(equalTo: name.widthAnchor, constant: 0),mobileNumber.heightAnchor.constraint(equalToConstant: 30) ])
+        
+         NSLayoutConstraint.activate([favBtn.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 0),favBtn.leftAnchor.constraint(equalTo: name.rightAnchor, constant: 10),favBtn.widthAnchor.constraint(equalToConstant: 30),favBtn.heightAnchor.constraint(equalToConstant: 30) ])
         
     }
     
